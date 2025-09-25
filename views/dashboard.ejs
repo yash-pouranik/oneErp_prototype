@@ -34,14 +34,14 @@
             <header class="main-header">
                 <div class="header-title">
                     <h1>Analytics Dashboard</h1>
-                    <p>Welcome, <%= session.instituteName %>!</p>
+                     <p>Welcome, <%= session.instituteName %>!</p>
                 </div>
                 <div class="header-actions">
                      <button class="btn btn-primary">New Project</button>
                 </div>
             </header>
 
-            <div class="card-grid">
+             <div class="card-grid">
                 <div class="stat-card">
                     <h4>Total Students</h4>
                     <p class="stat-number"><%= students.length %></p>
@@ -68,32 +68,48 @@
                     <form action="/dashboard/students" method="POST"> 
                         <input type="text" name="name" placeholder="Student Name" required> 
                         <input type="text" name="rollNumber" placeholder="Roll Number" required> 
+                        <input type="text" name="course" placeholder="Course" required>
+                        <input type="text" name="session" placeholder="Session" required>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label for="feesPaid">Fees Paid?</label>
+                            <input type="checkbox" name="feesPaid" id="feesPaid">
+                        </div>
                         <button type="submit" class="btn-primary">Add</button> 
                     </form>
                 </div>
 
                 <div class="dashboard-card card-full-width">
                     <h2>Student List</h2>
-                    <table>
-                        <thead>
-                            <tr> 
-                                <th>Name</th>
-                                <th>Roll Number</th> 
-                            </tr> 
-                        </thead>
-                        <tbody>
-                            <% if (students.length === 0) { %>
-                                <tr><td colspan="2" style="text-align: center; padding: 2rem;">No students added yet.</td></tr>
-                            <% } else { %>
-                                <% students.forEach(student => { %> 
-                                    <tr>
-                                        <td><%= student.name %></td> 
-                                        <td><%= student.rollNumber %></td>
-                                    </tr>
+                    <% if (students.length === 0) { %>
+                        <p style="text-align: center; padding: 2rem;">No students added yet.</p>
+                    <% } else { %>
+                        <% Object.keys(studentsByCourseAndSession).forEach(course => { %>
+                            <div class="course-section">
+                                <h3><%= course %></h3>
+                                <% Object.keys(studentsByCourseAndSession[course]).forEach(session => { %>
+                                    <h4>Session: <%= session %></h4>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Roll Number</th>
+                                                <th>Fees Paid</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% studentsByCourseAndSession[course][session].forEach(student => { %>
+                                                <tr>
+                                                    <td><%= student.name %></td>
+                                                    <td><%= student.rollNumber %></td>
+                                                    <td><%= student.feesPaid ? 'Yes' : 'No' %></td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
                                 <% }) %>
-                            <% } %>
-                        </tbody>
-                    </table>
+                            </div>
+                        <% }) %>
+                    <% } %>
                 </div>
             </div>
         </main>

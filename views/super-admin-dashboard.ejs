@@ -23,19 +23,19 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Institute Name</th> [cite: 2]
-                            <th>Subdomain</th> [cite: 2]
+                            <th>Institute Name</th>
+                            <th>Subdomain</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% institutes.forEach(inst => { %>
                             <tr>
-                                <td><%= inst.name %></td> [cite: 2]
-                                <td><%= inst.subdomain %></td> [cite: 2]
+                                <td><%= inst.name %></td>
+                                <td><%= inst.subdomain %></td>
                                 <td>
                                     <form action="/super-admin/approve/<%= inst._id %>" method="POST" style="margin:0;">
-                                        <button type="submit" class="btn btn-success">Approve</button> [cite: 3]
+                                        <button type="submit" class="btn btn-success">Approve</button>
                                     </form>
                                 </td>
                             </tr>
@@ -43,6 +43,28 @@
                     </tbody>
                 </table>
             <% } %>
+        </div>
+
+        <div class="dashboard-card" style="margin-top: 2rem;">
+            <h2>All Institutes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Institute Name</th>
+                        <th>Subdomain</th>
+                        <th>Total Students</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% activeInstitutes.forEach(inst => { %>
+                        <tr>
+                            <td><%= inst.name %></td>
+                            <td><%= inst.subdomain %></td>
+                            <td><%= inst.studentCount %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
     </main>
 </body>
