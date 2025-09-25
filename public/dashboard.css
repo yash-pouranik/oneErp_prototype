@@ -1,0 +1,180 @@
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+    --bg-color: #f4f7fe;
+    --card-color: #ffffff;
+    --font-color: #0d1117;
+    --subtle-font-color: #586069;
+    --accent-color: #4f46e5;
+    --border-color: #e1e4e8;
+    --sidenav-bg: #111827;
+    --sidenav-color: #9ca3af;
+    --sidenav-active-bg: #374151;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+/* --- General & Body Styles --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    margin: 0;
+}
+
+/* --- Main Layout Container --- */
+.dashboard-container {
+    display: flex;
+}
+
+/* --- Sidenav (Left Navigation) --- */
+.sidenav {
+    width: 260px;
+    background-color: var(--sidenav-bg);
+    color: var(--sidenav-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.sidenav-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--sidenav-active-bg);
+}
+.sidenav-header .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+.sidenav-nav {
+    flex-grow: 1;
+    padding: 1rem 0;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    color: var(--sidenav-color);
+    margin: 0.2rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.nav-item:hover {
+    background-color: var(--sidenav-active-bg);
+    color: #fff;
+}
+.nav-item.active {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+}
+.sidenav-footer {
+    padding: 1.5rem;
+}
+.sidenav-footer .logout-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    background-color: var(--sidenav-active-bg);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    margin-left: 260px; /* Sidenav ki width ke barabar */
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+/* --- Main Content Header --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.main-header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+.main-header p {
+    margin: 0;
+    color: var(--subtle-font-color);
+}
+
+/* --- Card Grid Layout --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Stat Card Style --- */
+.stat-card {
+    background-color: var(--card-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+.stat-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--subtle-font-color);
+    font-weight: 500;
+    font-size: 1rem;
+}
+.stat-card .stat-number {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+.stat-card .stat-change {
+    margin: 0.5rem 0 0 0;
+}
+.text-success { color: #10b981; }
+.text-danger { color: #ef4444; }
+
+/* --- Dashboard Card (Your existing card) Style --- */
+.dashboard-card {
+    background: var(--card-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+}
+.dashboard-card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.card-full-width {
+    grid-column: 1 / -1; /* Card ko poori width dega */
+}
+
+/* Table and Form Styles (aapke style.css se le sakte hain ya yahan add kar sakte hain) */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+thead th { font-weight: 600; color: var(--subtle-font-color); }
+tbody tr:hover { background-color: #f9fafb; }
+
+form { display: flex; gap: 1rem; align-items: center; }
+input[type="text"] {
+    flex: 1; padding: 0.8rem 1rem; border-radius: 8px;
+    border: 1px solid var(--border-color); font-size: 1rem;
+}

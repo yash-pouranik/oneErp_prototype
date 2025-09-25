@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Super Admin Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/style.css"> </head>
+<body class="dashboard-bg">
+    <div class="dashboard-header">
+        <h1>
+            <span class="logo">ONE-ERP</span>
+            <span class="portal-title">| Super Admin Panel</span>
+        </h1>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <main class="dashboard-main">
+        <div class="dashboard-card">
+            <h2>Pending Institute Approvals</h2>
+            
+            <% if (institutes.length === 0) { %>
+                <p style="text-align: center; padding: 2rem; color: var(--subtle-font-color);">There are no pending approvals at the moment.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Institute Name</th> [cite: 2]
+                            <th>Subdomain</th> [cite: 2]
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% institutes.forEach(inst => { %>
+                            <tr>
+                                <td><%= inst.name %></td> [cite: 2]
+                                <td><%= inst.subdomain %></td> [cite: 2]
+                                <td>
+                                    <form action="/super-admin/approve/<%= inst._id %>" method="POST" style="margin:0;">
+                                        <button type="submit" class="btn btn-success">Approve</button> [cite: 3]
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

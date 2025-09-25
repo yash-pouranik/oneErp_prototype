@@ -1,0 +1,36 @@
+<head>
+        <link rel="stylesheet" href="/style.css">
+</head>
+
+<div class="auth-wrapper">
+    <div class="auth-branding">
+        <div class="auth-branding-content">
+            <h2>ONE-ERP</h2>
+            <p>The future of Integrated Campus Management is here.</p>
+        </div>
+    </div>
+
+    <div class="auth-form">
+        <div class="form-container">
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Login to access your institute's dashboard.</p>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <div class="form-footer">
+                <p>New Institute? <a href="/signup">Register here</a></p>
+            </div>
+            <% if (error) { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+        </div>
+    </div>
+</div>
