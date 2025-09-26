@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Subject for Attendance</title>
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav-teacher') %>
+        <main class="main-content">
+            <div class="dashboard-card">
+                <h2>Select a Subject</h2>
+                <p>Please choose a subject to mark attendance for today.</p>
+                <div>
+                    <% mySubjects.forEach(subject => { %>
+                        <a href="/teacher/attendance/<%= subject._id %>" class="btn-primary" style="display: block; margin-bottom: 1rem; text-align: center;">
+                            <%= subject.name %> (<%= subject.course.name %> - Year <%= subject.year %>)
+                        </a>
+                    <% }) %>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

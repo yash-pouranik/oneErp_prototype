@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Take Attendance</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav-teacher') %>
+        <main class="main-content">
+            <div class="dashboard-card">
+                <h2>Mark Attendance for <%= subject.name %></h2>
+                <form action="/teacher/attendance/<%= subject._id %>" method="POST">
+                    <input type="date" name="date" value="<%= new Date().toISOString().split('T')[0] %>" required>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll Number</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student => { %>
+                                <tr>
+                                    <td><%= student.name %></td>
+                                    <td><%= student.rollNumber %></td>
+                                    <td>
+                                        <label><input type="radio" name="attendance[<%= student._id %>]" value="Present" checked> Present</label>
+                                        <label><input type="radio" name="attendance[<%= student._id %>]" value="Absent"> Absent</label>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save Attendance</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

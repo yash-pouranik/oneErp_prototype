@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Students</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav') %>
+        <main class="main-content">
+            <div class="main-header">
+                <h1>Student Management</h1>
+                <a href="/dashboard/students/add" class="btn btn-primary" style="width: auto;">Add New Student</a>
+            </div>
+            <div class="dashboard-card">
+                <h2>All Students</h2>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Roll Number</th>
+                                <th>Course</th>
+                                <th>Session</th>
+                                <th>Year</th>
+                                <th>Fees Paid</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student => { %>
+                                <tr>
+                                    <td><%= student.name %></td>
+                                    <td><%= student.rollNumber %></td>
+                                    <td><%= student.course %></td>
+                                    <td><%= student.session %></td>
+                                    <td><%= student.year %></td>
+                                    <td><%= student.feesPaid ? 'Yes' : 'No' %></td>
+                                    <td><%= student.status %></td>
+                                    <td>
+                                        <a href="/dashboard/students/<%= student._id %>/edit" class="btn-sm">Edit</a>
+                                        <form action="/dashboard/students/<%= student._id %>/delete" method="POST" style="display:inline;">
+                                            <button type="submit" class="btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

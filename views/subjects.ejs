@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Subjects</title>
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav') %>
+        <main class="main-content">
+            <div class="dashboard-card">
+                <h2>Add New Subject</h2>
+                <form action="/dashboard/subjects" method="POST" style="flex-direction: column; align-items: stretch;">
+                    <div class="form-group"><label>Subject Name</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>Subject Code</label><input type="text" name="code" required></div>
+                    <div class="form-group"><label>Course</label>
+                        <select name="course" required>
+                            <% courses.forEach(course => { %><option value="<%= course._id %>"><%= course.name %></option><% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <input type="number" name="semester" placeholder="e.g., 1, 2, 3..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Subject</button>
+                </form>
+            </div>
+            <div class="dashboard-card" style="margin-top: 2rem;">
+                <h2>Existing Subjects</h2>
+                <table>
+                    <thead><tr><th>Name</th><th>Course</th><th>Year</th><th>Assign Teacher</th></tr></thead>
+                    <tbody>
+                        <% subjects.forEach(subject => { %>
+                        <tr>
+                            <td><%= subject.name %></td>
+                            <td><%= subject.course.name %></td>
+                            <td><%= subject.year %></td>
+                            <td>
+                                <form action="/dashboard/subjects/assign-teacher" method="POST">
+                                    <input type="hidden" name="subjectId" value="<%= subject._id %>">
+                                    <select name="teacherId">
+                                        <option>-- Select --</option>
+                                        <% teachers.forEach(teacher => { %>
+                                        <option value="<%= teacher._id %>" <%= subject.teacher && subject.teacher._id.equals(teacher._id) ? 'selected' : '' %>>
+                                            <%= teacher.name %>
+                                        </option>
+                                        <% }) %>
+                                    </select>
+                                    <button type="submit">Save</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

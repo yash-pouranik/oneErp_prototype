@@ -1,25 +1,43 @@
 /* --- Google Font Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* --- CSS Variables --- */
+/* --- New Dark Theme Color Palette --- */
 :root {
-    --bg-color: #f4f7fe;
-    --card-color: #ffffff;
-    --font-color: #0d1117;
-    --subtle-font-color: #586069;
-    --accent-color: #4f46e5;
-    --border-color: #e1e4e8;
-    --sidenav-bg: #111827;
-    --sidenav-color: #9ca3af;
-    --sidenav-active-bg: #374151;
-    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    /* Backgrounds */
+    --bg-color: #0B0C10;
+    --card-color: #161A1D;
+    
+    /* Typography */
+    --font-color: #FFFFFF;
+    --body-font-color: #C5C6C7;
+    --subtle-font-color: #8D8D8D;
+
+    /* Primary Palette */
+    --primary-color: #1E2A78;
+    --secondary-color: #6A0DAD;
+    --accent-color: #D726FF;
+
+    /* UI Elements */
+    --border-color: #30363d;
+    --shadow: 0 10px 20px -10px rgba(106, 13, 173, 0.2);
+    --primary-hover: #243B8C;
+
+    /* Sidenav */
+    --sidenav-bg: #161A1D;
+    --sidenav-color: #8D8D8D;
+    --sidenav-active-bg: var(--primary-color);
+
+    /* Status Colors */
+    --success: #00C851;
+    --error: #FF4444;
 }
+
 
 /* --- General & Body Styles --- */
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
-    color: var(--font-color);
+    color: var(--body-font-color);
     margin: 0;
 }
 
@@ -39,16 +57,17 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid var(--border-color);
 }
 .sidenav-header {
     padding: 1.5rem;
     text-align: center;
-    border-bottom: 1px solid var(--sidenav-active-bg);
+    border-bottom: 1px solid var(--border-color);
 }
 .sidenav-header .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--font-color);
     letter-spacing: 1px;
 }
 .sidenav-nav {
@@ -66,11 +85,11 @@ body {
     transition: background-color 0.2s, color 0.2s;
 }
 .nav-item:hover {
-    background-color: var(--sidenav-active-bg);
+    background-color: var(--primary-hover);
     color: #fff;
 }
 .nav-item.active {
-    background-color: var(--accent-color);
+    background-color: var(--sidenav-active-bg);
     color: #fff;
 }
 .nav-icon {
@@ -80,6 +99,7 @@ body {
 }
 .sidenav-footer {
     padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
 }
 .sidenav-footer .logout-btn {
     display: block;
@@ -87,7 +107,7 @@ body {
     text-align: center;
     padding: 0.8rem;
     border-radius: 8px;
-    background-color: var(--sidenav-active-bg);
+    background-color: #24292e;
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -95,7 +115,7 @@ body {
 
 /* --- Main Content Area --- */
 .main-content {
-    margin-left: 260px; /* Sidenav ki width ke barabar */
+    margin-left: 260px;
     flex-grow: 1;
     padding: 2rem;
 }
@@ -111,6 +131,7 @@ body {
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
+    color: var(--font-color);
 }
 .main-header p {
     margin: 0;
@@ -142,14 +163,15 @@ body {
     font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
+    color: var(--font-color);
 }
 .stat-card .stat-change {
     margin: 0.5rem 0 0 0;
 }
-.text-success { color: #10b981; }
-.text-danger { color: #ef4444; }
+.text-success { color: var(--success); }
+.text-danger { color: var(--error); }
 
-/* --- Dashboard Card (Your existing card) Style --- */
+/* --- Dashboard Card Style --- */
 .dashboard-card {
     background: var(--card-color);
     border-radius: 12px;
@@ -162,39 +184,31 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
+    color: var(--font-color);
 }
 .card-full-width {
-    grid-column: 1 / -1; /* Card ko poori width dega */
+    grid-column: 1 / -1;
 }
 
-/* Table and Form Styles (aapke style.css se le sakte hain ya yahan add kar sakte hain) */
+/* --- Table and Form Styles --- */
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
 thead th { font-weight: 600; color: var(--subtle-font-color); }
-tbody tr:hover { background-color: #f9fafb; }
+tbody tr:hover { background-color: rgba(36, 59, 140, 0.2); }
 
 form { display: flex; gap: 1rem; align-items: center; }
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"], select {
     flex: 1; padding: 0.8rem 1rem; border-radius: 8px;
     border: 1px solid var(--border-color); font-size: 1rem;
+    background-color: var(--bg-color); color: var(--body-font-color);
 }
+select { width: 100%; }
 
-.course-section {
-    margin-bottom: 2rem;
-}
-
-.course-section h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
+.form-group {
+    width: 100%;
     margin-bottom: 1rem;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 0.5rem;
-    color: var(--accent-color);
 }
-
-.course-section h4 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: var(--font-color);
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
 }

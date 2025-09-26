@@ -16,28 +16,58 @@
                 </div>
             </header>
             <div class="card-grid">
-                <div class="dashboard-card card-full-width">
-                    <h2>Add Student</h2>
-                    <form action="/dashboard/students" method="post">
-                        <input type="text" name="name" placeholder="Student Name" required>
-                        <input type="text" name="rollNumber" placeholder="Roll Number" required>
-                        <button type="submit" class="btn-primary">Add</button>
-                    </form>
+                <div class="stat-card">
+                    <h4>Total Students</h4>
+                    <p class="stat-number"><%= totalStudents %></p>
                 </div>
+                <div class="stat-card">
+                    <h4>Fees Paid</h4>
+                    <p class="stat-number"><%= feesPaidCount %> / <%= totalStudents %></p>
+                    <p class="stat-change text-success"><%= Math.round((feesPaidCount / (totalStudents || 1)) * 100) %>% complete</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Active Students</h4>
+                    <p class="stat-number"><%= totalStudents %></p> <p class="stat-change text-success">All Active</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Courses</h4>
+                    <p class="stat-number"><%= studentsByCourse.length %></p>
+                    <p class="stat-change text-success">Total Branches</p>
+                </div>
+                
                 <div class="dashboard-card card-full-width">
-                    <h2>Student List</h2>
+                    <h2>Students by Branch</h2>
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Roll Number</th>
+                                <th>Branch / Course</th>
+                                <th>Number of Students</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% students.forEach(student => { %>
+                            <% studentsByCourse.forEach(course => { %>
                                 <tr>
-                                    <td><%= student.name %></td>
-                                    <td><%= student.rollNumber %></td>
+                                    <td><%= course._id %></td>
+                                    <td><%= course.count %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dashboard-card card-full-width">
+                    <h2>Students by Session</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Session / Year</th>
+                                <th>Number of Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% studentsBySession.forEach(session => { %>
+                                <tr>
+                                    <td><%= session._id %></td>
+                                    <td><%= session.count %></td>
                                 </tr>
                             <% }) %>
                         </tbody>

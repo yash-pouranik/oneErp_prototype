@@ -8,13 +8,8 @@ const courseSchema = new mongoose.Schema({
         ref: 'Institute',
         required: true,
         index: true
-    },
-    // Add this teacher field
-    teacher: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // It refers to the User model
-        required: false // A course might exist before a teacher is assigned
     }
+    // The 'teacher' field has been removed from here
 });
 
 module.exports = mongoose.model('Course', courseSchema);

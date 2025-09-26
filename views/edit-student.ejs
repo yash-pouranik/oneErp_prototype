@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav') %>
+        <main class="main-content">
+            <div class="dashboard-card">
+                <h2>Edit Student: <%= student.name %></h2>
+                <form action="/dashboard/students/<%= student._id %>/edit" method="POST" style="flex-direction: column; align-items: stretch;">
+                    
+                    <h4>Academic Details</h4>
+                    <div class="form-group"><label>Full Name</label><input type="text" name="name" value="<%= student.name %>" required></div>
+                    <div class="form-group"><label>Roll Number</label><input type="text" name="rollNumber" value="<%= student.rollNumber %>" required></div>
+                    <div class="form-group"><label>Enrollment Number</label><input type="text" name="enrollmentNumber" value="<%= student.enrollmentNumber %>"></div>
+                    <div class="form-group"><label>Course / Branch</label><input type="text" name="course" value="<%= student.course %>" required></div>
+                    <div class="form-group"><label>Department</label><input type="text" name="department" value="<%= student.department %>"></div>
+                    <div class="form-group"><label>Session</label><input type="text" name="session" value="<%= student.session %>" required></div>
+                    <div class="form-group">
+                        <label>Current Semester</label>
+                        <input type="number" name="currentSemester" placeholder="e.g., 1, 2, 3..." required>
+                    </div>
+                    <div class="form-group"><label>Section</label><input type="text" name="section" value="<%= student.section %>"></div>
+
+                    <h4>Personal Details</h4>
+                    <div class="form-group"><label>Date of Birth</label><input type="date" name="dob" value="<%= student.dob ? student.dob.toISOString().split('T')[0] : '' %>"></div>
+                    <div class="form-group"><label>Gender</label><select name="gender"><option <%= student.gender === 'Male' ? 'selected' : '' %>>Male</option><option <%= student.gender === 'Female' ? 'selected' : '' %>>Female</option><option <%= student.gender === 'Other' ? 'selected' : '' %>>Other</option></select></div>
+                    <div class="form-group"><label>Email</label><input type="email" name="email" value="<%= student.email %>"></div>
+                    <div class="form-group"><label>Phone</label><input type="text" name="phone" value="<%= student.phone %>"></div>
+                    <div class="form-group"><label>Address</label><input type="text" name="address" value="<%= student.address %>"></div>
+                    
+                    <h4>Guardian Details</h4>
+                    <div class="form-group"><label>Guardian Name</label><input type="text" name="guardianName" value="<%= student.guardianName %>"></div>
+                    <div class="form-group"><label>Guardian Contact</label><input type="text" name="guardianContact" value="<%= student.guardianContact %>"></div>
+                    
+                    <h4>Other</h4>
+                    <div class="form-group"><label><input type="checkbox" name="feesPaid" <%= student.feesPaid ? 'checked' : '' %>> Fees Paid</label></div>
+                    <div class="form-group"><label>Status</label><select name="status"><option>active</option><option>graduated</option><option>left</option><option>suspended</option></select></div>
+
+                    <button type="submit" class="btn btn-primary">Update Student</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

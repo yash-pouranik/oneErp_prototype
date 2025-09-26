@@ -24,7 +24,6 @@
                         <tr>
                             <th>Course Name</th>
                             <th>Course Code</th>
-                            <th>Assign Teacher</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,20 +31,7 @@
                             <tr>
                                 <td><%= course.name %></td>
                                 <td><%= course.code %></td>
-                                <td>
-                                    <form action="/dashboard/courses/assign-teacher" method="POST">
-                                        <input type="hidden" name="courseId" value="<%= course._id %>">
-                                        <select name="teacherId">
-                                            <option value="">-- Select Teacher --</option>
-                                            <% teachers.forEach(teacher => { %>
-                                                <option value="<%= teacher._id %>" <%= course.teacher && course.teacher._id.equals(teacher._id) ? 'selected' : '' %>>
-                                                    <%= teacher.name %>
-                                                </option>
-                                            <% }) %>
-                                        </select>
-                                        <button type="submit">Save</button>
-                                    </form>
-                                </td>
+                                
                             </tr>
                         <% }) %>
                     </tbody>

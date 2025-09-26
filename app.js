@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const path = require('path');
-
+const flash = require('connect-flash');
 
 
 // Import routes
@@ -33,6 +33,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
+
+app.use(flash());
+
 
 // Middleware to pass session data to all views
 app.use((req, res, next) => {
