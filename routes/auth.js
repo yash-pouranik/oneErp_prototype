@@ -42,18 +42,20 @@ router.get('/signup', (req, res) => res.render('signup', { error: null }));
 
 router.post('/signup', async (req, res) => {
     try {
+        // Destructure all fields from the form body
         const { instituteName, subdomain, adminName, email, password } = req.body;
         
         const existingInstitute = await Institute.findOne({ subdomain });
-        if (existingInstitute) {
-            return res.render('signup', { error: 'Subdomain already in use.' });
+        const existingUser = await User.findOne({ email });
+        if (existingInstitute || existingUser) {
+            return res.render('signup', { error: 'Subdomain or email already in use.' });
         }
 
         const newInstitute = new Institute({ name: instituteName, subdomain });
         await newInstitute.save();
 
         const newAdmin = new User({
-            name: adminName,
+            name: adminName, // Use the new adminName field here
             email,
             password,
             institute: newInstitute._id,
