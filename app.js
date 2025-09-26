@@ -9,6 +9,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const instituteRoutes = require('./routes/institute');
 const superAdminRoutes = require('./routes/superAdmin');
+const teacherRoutes = require('./routes/teacher');
 
 const app = express();
 const PORT = 3000;
@@ -43,6 +44,8 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 app.use('/dashboard', instituteRoutes);
 app.use('/super-admin', superAdminRoutes);
+app.use('/teacher', teacherRoutes);
+
 
 // --- Start Server ---
 app.listen(PORT, () => {

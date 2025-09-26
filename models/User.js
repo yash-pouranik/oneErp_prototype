@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
     email: {
         type: String,
         required: true,
@@ -12,20 +13,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // Replace tenantId string with a proper database reference
     institute: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Institute', // This links to the Institute model
+        ref: 'Institute',
         required: true
     },
     role: {
         type: String,
-        enum: ['institute_admin', 'super_admin'], // Defines user permissions
+        enum: ['institute_admin', 'super_admin', 'teacher'],
         required: true
     }
 });
 
-// Password hashing pre-save hook remains the same
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);

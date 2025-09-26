@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Courses</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav') %>
+        <main class="main-content">
+            <div class="dashboard-card">
+                <h2>Add New Course</h2>
+                <form action="/dashboard/courses" method="POST">
+                    <input type="text" name="name" placeholder="Course Name" required>
+                    <input type="text" name="code" placeholder="Course Code" required>
+                    <button type="submit" class="btn-primary">Add Course</button>
+                </form>
+            </div>
+            <div class="dashboard-card" style="margin-top: 2rem;">
+                <h2>Existing Courses</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Code</th>
+                            <th>Assign Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% courses.forEach(course => { %>
+                            <tr>
+                                <td><%= course.name %></td>
+                                <td><%= course.code %></td>
+                                <td>
+                                    <form action="/dashboard/courses/assign-teacher" method="POST">
+                                        <input type="hidden" name="courseId" value="<%= course._id %>">
+                                        <select name="teacherId">
+                                            <option value="">-- Select Teacher --</option>
+                                            <% teachers.forEach(teacher => { %>
+                                                <option value="<%= teacher._id %>" <%= course.teacher && course.teacher._id.equals(teacher._id) ? 'selected' : '' %>>
+                                                    <%= teacher.name %>
+                                                </option>
+                                            <% }) %>
+                                        </select>
+                                        <button type="submit">Save</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

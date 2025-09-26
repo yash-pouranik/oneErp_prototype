@@ -23,8 +23,9 @@ const setup = async () => {
         
         // 2. Create the super admin user
         const superAdmin = new User({
+            name: 'Super Admin', // Added the required name field
             email: 'superadmin@one-erp.com',
-            password: 'superadmin123',
+            password: 'yash1234',
             institute: adminInstitute._id,
             role: 'super_admin'
         });
@@ -32,7 +33,7 @@ const setup = async () => {
 
         console.log('✅ Super admin setup complete!');
         console.log('Email: superadmin@one-erp.com');
-        console.log('Password: superadmin123');
+        console.log('Password: yash1234'); // Updated to reflect the new password
 
     } catch (error) {
         console.error('Error during setup:', error);

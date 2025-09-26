@@ -7,109 +7,41 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <aside class="sidenav">
-            <div class="sidenav-header">
-                <span class="logo">ONE-ERP</span>
-            </div>
-            <nav class="sidenav-nav">
-                <a href="#" class="nav-item active">
-                    <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="nav-item">
-                     <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-                    <span>Students</span>
-                </a>
-                <a href="#" class="nav-item">
-                     <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path></svg>
-                    <span>Departments</span>
-                </a>
-                 </nav>
-            <div class="sidenav-footer">
-                <a href="/logout" class="logout-btn">Logout</a>
-            </div>
-        </aside>
-
+        <%- include('partials/sidenav') %>
         <main class="main-content">
             <header class="main-header">
                 <div class="header-title">
                     <h1>Analytics Dashboard</h1>
-                     <p>Welcome, <%= session.instituteName %>!</p>
-                </div>
-                <div class="header-actions">
-                     <button class="btn btn-primary">New Project</button>
+                    <p>Welcome, <%= session.instituteName %>!</p>
                 </div>
             </header>
-
-             <div class="card-grid">
-                <div class="stat-card">
-                    <h4>Total Students</h4>
-                    <p class="stat-number"><%= students.length %></p>
-                    <p class="stat-change text-success">+5 this week</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Courses</h4>
-                    <p class="stat-number">24</p>
-                    <p class="stat-change text-success">+2 this semester</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Pending Tasks</h4>
-                    <p class="stat-number">12</p>
-                    <p class="stat-change text-danger">-3 from yesterday</p>
-                </div>
-                 <div class="stat-card">
-                    <h4>Faculty</h4>
-                    <p class="stat-number">64</p>
-                    <p class="stat-change text-success">+1 new hire</p>
-                </div>
-
+            <div class="card-grid">
                 <div class="dashboard-card card-full-width">
                     <h2>Add Student</h2>
-                    <form action="/dashboard/students" method="POST"> 
-                        <input type="text" name="name" placeholder="Student Name" required> 
-                        <input type="text" name="rollNumber" placeholder="Roll Number" required> 
-                        <input type="text" name="course" placeholder="Course" required>
-                        <input type="text" name="session" placeholder="Session" required>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <label for="feesPaid">Fees Paid?</label>
-                            <input type="checkbox" name="feesPaid" id="feesPaid">
-                        </div>
-                        <button type="submit" class="btn-primary">Add</button> 
+                    <form action="/dashboard/students" method="post">
+                        <input type="text" name="name" placeholder="Student Name" required>
+                        <input type="text" name="rollNumber" placeholder="Roll Number" required>
+                        <button type="submit" class="btn-primary">Add</button>
                     </form>
                 </div>
-
                 <div class="dashboard-card card-full-width">
                     <h2>Student List</h2>
-                    <% if (students.length === 0) { %>
-                        <p style="text-align: center; padding: 2rem;">No students added yet.</p>
-                    <% } else { %>
-                        <% Object.keys(studentsByCourseAndSession).forEach(course => { %>
-                            <div class="course-section">
-                                <h3><%= course %></h3>
-                                <% Object.keys(studentsByCourseAndSession[course]).forEach(session => { %>
-                                    <h4>Session: <%= session %></h4>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Roll Number</th>
-                                                <th>Fees Paid</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% studentsByCourseAndSession[course][session].forEach(student => { %>
-                                                <tr>
-                                                    <td><%= student.name %></td>
-                                                    <td><%= student.rollNumber %></td>
-                                                    <td><%= student.feesPaid ? 'Yes' : 'No' %></td>
-                                                </tr>
-                                            <% }) %>
-                                        </tbody>
-                                    </table>
-                                <% }) %>
-                            </div>
-                        <% }) %>
-                    <% } %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Roll Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student => { %>
+                                <tr>
+                                    <td><%= student.name %></td>
+                                    <td><%= student.rollNumber %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
