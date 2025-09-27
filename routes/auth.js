@@ -5,6 +5,9 @@ const Institute = require('../models/Institute');
 const Student = require('../models/Student'); // Import Student model
 
 const router = express.Router();
+router.get('/', (req, res) => {
+    res.render('landing');
+});
 
 router.get('/login', (req, res) => res.render('login', { error: null }));
 

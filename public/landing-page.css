@@ -1,0 +1,193 @@
+/* --- Glassmorphism Landing Page Styles --- */
+body {
+    overflow-x: hidden; /* Prevent horizontal scroll from blurred shapes */
+}
+
+.page-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Background Shapes */
+.shape-blur {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: 1;
+}
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    left: -200px;
+    background: rgba(106, 13, 173, 0.3); /* Royal Purple */
+}
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    right: -150px;
+    background: rgba(30, 42, 120, 0.4); /* Deep Blue */
+}
+
+/* Header */
+.main-header {
+    padding: 1.5rem 0;
+}
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(22, 26, 29, 0.6); /* Card color with transparency */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(48, 54, 61, 0.5); /* Border color with transparency */
+    padding: 1rem 2rem;
+    border-radius: 12px;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--font-color);
+    text-decoration: none;
+}
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.nav-link {
+    color: var(--body-font-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.nav-link:hover {
+    color: var(--accent-color);
+}
+.nav-btn {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary-color);
+}
+.nav-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+
+/* Hero Section */
+.hero {
+    padding: 8rem 0;
+    text-align: center;
+}
+.hero-content {
+    max-width: 800px;
+}
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(215, 38, 255, 0.3); /* Neon Purple glow */
+}
+.hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--body-font-color);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cta-button {
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 30px rgba(215, 38, 255, 0.5);
+}
+.cta-button:hover {
+    background-color: #F148FF;
+    transform: translateY(-3px);
+}
+
+/* Footer */
+.main-footer {
+    padding: 4rem 0 2rem 0;
+    text-align: center;
+    color: var(--subtle-font-color);
+}
+/* --- Additional Landing Page Styles --- */
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+}
+.section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--font-color);
+    margin-bottom: 1rem;
+}
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--body-font-color);
+}
+
+
+/* Features Section */
+.features {
+    padding: 6rem 0;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+.feature-card {
+    background: rgba(22, 26, 29, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: left;
+}
+.feature-card h3 {
+    font-size: 1.5rem;
+    color: var(--font-color);
+    margin-bottom: 1rem;
+}
+
+
+/* Testimonials Section */
+.testimonials {
+    padding: 6rem 0;
+}
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.testimonial-card {
+    background: linear-gradient(135deg, rgba(30, 42, 120, 0.3), rgba(106, 13, 173, 0.3));
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 12px;
+}
+.testimonial-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+}
+.testimonial-card .author {
+    font-weight: 600;
+    color: var(--font-color);
+}
