@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Institute = require('../models/Institute');
+const Student = require('../models/Student'); // Import Student model
+
 const router = express.Router();
 
 router.get('/login', (req, res) => res.render('login', { error: null }));
@@ -9,27 +11,50 @@ router.get('/login', (req, res) => res.render('login', { error: null }));
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email }).populate('institute');
-        if (!user) return res.render('login', { error: 'Invalid credentials.' });
+        
+        // 1. Check if it's an Admin or Teacher
+        let user = await User.findOne({ email }).populate('institute');
+        
+        if (user) {
+            // **FIX:** Verify password for the user (admin/teacher) first
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.render('login', { error: 'Invalid credentials.' });
+            }
 
-        if (user.role === 'institute_admin' && user.institute.status !== 'active') {
-            return res.render('login', { error: 'Your institute is not yet approved.' });
+            // --- If password is correct, create session ---
+            req.session.userId = user._id;
+            req.session.role = user.role;
+            req.session.userName = user.name;
+            req.session.instituteId = user.institute._id;
+            req.session.instituteName = user.institute.name;
+            
+            if (user.role === 'super_admin') return res.redirect('/super-admin/dashboard');
+            if (user.role === 'institute_admin') return res.redirect('/dashboard');
+            if (user.role === 'teacher') return res.redirect('/teacher/dashboard');
         }
-        
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.render('login', { error: 'Invalid credentials.' });
 
-        req.session.userId = user._id;
-        req.session.role = user.role;
-        req.session.instituteId = user.institute._id;
-        req.session.instituteName = user.institute.name;
-        req.session.userName = user.name;
+        // 2. If not an admin/teacher, check if it's a Student
+        let student = await Student.findOne({ email }).populate('institute');
+        if (student) {
+            const isMatch = await bcrypt.compare(password, student.password);
+            if (!isMatch) return res.render('login', { error: 'Invalid credentials.' });
 
-        if (user.role === 'super_admin') return res.redirect('/super-admin/dashboard');
-        if (user.role === 'institute_admin') return res.redirect('/dashboard');
-        if (user.role === 'teacher') return res.redirect('/teacher/dashboard'); // Add this line
-        
+            // Create session for the student
+            req.session.userId = student._id;
+            req.session.role = 'student'; // Set role manually
+            req.session.userName = student.name;
+            req.session.instituteId = student.institute._id;
+            req.session.instituteName = student.institute.name;
+
+            return res.redirect('/student/dashboard');
+        }
+
+        // 3. If no user or student found at all
+        return res.render('login', { error: 'Invalid credentials.' });
+
     } catch (error) {
+        console.log(error);
         res.render('login', { error: 'An error occurred.' });
     }
 });

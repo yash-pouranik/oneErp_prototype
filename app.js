@@ -4,15 +4,21 @@ const mongoose = require('mongoose');
 const path = require('path');
 const flash = require('connect-flash');
 
+const app = express();
+const PORT = 3000;
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
+
 
 // Import routes
 const authRoutes = require('./routes/auth');
 const instituteRoutes = require('./routes/institute');
 const superAdminRoutes = require('./routes/superAdmin');
 const teacherRoutes = require('./routes/teacher');
+const studentRoutes = require('./routes/student');
 
-const app = express();
-const PORT = 3000;
+
 
 app.use(express.static('public'));
 
@@ -27,7 +33,7 @@ mongoose.connect(MONGO_URI)
 // --- Middlewares ---
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
     secret: 'a-much-better-sih-secret-key-for-v2',
     resave: false,
@@ -48,6 +54,7 @@ app.use('/', authRoutes);
 app.use('/dashboard', instituteRoutes);
 app.use('/super-admin', superAdminRoutes);
 app.use('/teacher', teacherRoutes);
+app.use('/student', studentRoutes);
 
 
 // --- Start Server ---

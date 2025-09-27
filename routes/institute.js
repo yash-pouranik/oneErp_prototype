@@ -48,12 +48,13 @@ router.get('/subjects', async (req, res) => {
 });
 
 router.post('/subjects', async (req, res) => {
-    const { name, code, course, year } = req.body;
+    const { name, code, course, year , semester} = req.body;
     await new Subject({
         name,
         code,
         course,
         year,
+        semester,
         institute: req.session.instituteId
     }).save();
     res.redirect('/dashboard/subjects');
@@ -81,6 +82,7 @@ router.get('/students', async (req, res) => {
 router.get('/students/add', async (req, res) => {
     // Fetch the list of courses for the dropdown menu
     const courses = await Course.find({ institute: req.session.instituteId });
+    console.log(courses, req.session.instituteId)
     res.render('add-student', { courses }); // Pass courses to the EJS file
 });
 
@@ -111,6 +113,7 @@ router.post('/students/:id/delete', async (req, res) => {
 
 // --- Course Management ---
 router.get('/courses', async (req, res) => {
+    console.log(req.session.instituteId);
     // We need to fetch both courses and teachers
     const courses = await Course.find({ institute: req.session.instituteId });
     const teachers = await User.find({ institute: req.session.instituteId, role: 'teacher' });

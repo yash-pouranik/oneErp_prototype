@@ -18,23 +18,20 @@
                             <% courses.forEach(course => { %><option value="<%= course._id %>"><%= course.name %></option><% }) %>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Semester</label>
-                        <input type="number" name="semester" placeholder="e.g., 1, 2, 3..." required>
-                    </div>
+                    <div class="form-group"><label>Semester</label><input type="number" name="semester" required></div>
                     <button type="submit" class="btn btn-primary">Add Subject</button>
                 </form>
             </div>
             <div class="dashboard-card" style="margin-top: 2rem;">
                 <h2>Existing Subjects</h2>
                 <table>
-                    <thead><tr><th>Name</th><th>Course</th><th>Year</th><th>Assign Teacher</th></tr></thead>
+                    <thead><tr><th>Name</th><th>Course</th><th>Semester</th><th>Assign Teacher</th></tr></thead>
                     <tbody>
                         <% subjects.forEach(subject => { %>
                         <tr>
                             <td><%= subject.name %></td>
-                            <td><%= subject.course.name %></td>
-                            <td><%= subject.year %></td>
+                            <td><%= subject.course ? subject.course.name : 'N/A' %></td>
+                            <td><%= subject.semester %></td>
                             <td>
                                 <form action="/dashboard/subjects/assign-teacher" method="POST">
                                     <input type="hidden" name="subjectId" value="<%= subject._id %>">

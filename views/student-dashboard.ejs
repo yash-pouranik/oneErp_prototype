@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidenav">
+            <div class="sidenav-header"><span class="logo">AcademiLink</span></div>
+            <nav class="sidenav-nav">
+                <a href="/student/dashboard" class="nav-item active"><span>Dashboard</span></a>
+            </nav>
+            <div class="sidenav-footer"><a href="/logout" class="logout-btn">Logout</a></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Student Dashboard</h1>
+                    <p>Welcome, <%= student.name %>!</p>
+                </div>
+            </header>
+
+            <div class="card-grid">
+                <div class="stat-card">
+                    <h4>Fee Status</h4>
+                    <% if (student.feesPaid) { %>
+                        <p class="stat-number" style="color: var(--success);">Paid</p>
+                    <% } else { %>
+                        <p class="stat-number" style="color: var(--error);">Pending</p>
+                    <% } %>
+                </div>
+                <div class="stat-card">
+                    <h4>Course</h4>
+                    <p class="stat-number"><%= student.course.name %></p> </div>
+                <div class="stat-card">
+                    <h4>Current Semester</h4>
+                    <p class="stat-number"><%= student.currentSemester %></p>
+                </div>
+
+                <div class="dashboard-card card-full-width">
+                    <h2>Attendance Summary</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Attended / Total</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% attendanceSummary.forEach(att => { %>
+                                <tr>
+                                    <td><%= att.subjectName %></td>
+                                    <td><%= att.present %> / <%= att.total %></td>
+                                    <td><%= att.percentage %>%</td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
