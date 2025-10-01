@@ -1,36 +1,33 @@
 /* --- Google Font Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* --- Light Mode Color Scheme --- */
+/* --- BRIGHT/WHITE MODE Color Scheme --- */
 :root {
-    --bg-color: #f4f7fe;
-    --card-color: #ffffff;
-    --font-color: #0d1117;
-    --subtle-font-color: #586069;
-    --accent-color: #4f46e5;
-    --accent-glow: rgba(79, 70, 229, 0.2);
-    --border-color: #e1e4e8;
-    --shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+    /* Backgrounds */
+    --bg-color: #f4f7fe; /* Very light grey/off-white */
+    --card-color: #ffffff; /* Pure white */
+    
+    /* Typography */
+    --font-color: #0d1117; /* Very dark text */
+    --subtle-font-color: #586069; /* Medium dark grey */
+
+    /* Primary Accent (Kept for branding contrast) */
+    --accent-color: #4f46e5; /* Indigo */
+    --accent-glow: rgba(79, 70, 229, 0.2); /* Lightened glow for bright background */
+    
+    /* UI Elements */
+    --border-color: #e1e4e8; /* Light grey border */
+    --shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+    /* Aurora Colors (Subtle on light background) */
     --aurora-1: #4f46e5;
     --aurora-2: #7c3aed;
     --aurora-3: #ec4899;
 }
 
-/* --- Dark Mode Color Scheme --- */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #0d1117;
-        --card-color: #161b22;
-        --font-color: #c9d1d9;
-        --subtle-font-color: #8b949e;
-        --accent-color: #60a5fa;
-        --accent-glow: rgba(96, 165, 250, 0.2);
-        --border-color: #30363d;
-        --aurora-1: #60a5fa;
-        --aurora-2: #7c3aed;
-        --aurora-3: #f472b6;
-    }
-}
+/* --- Dark Mode Color Scheme (REMOVED/SUPPRESSED) --- */
+/* The dark mode block is removed to force the bright theme. */
+
 
 /* --- General & Body Styles --- */
 body {
@@ -43,7 +40,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Keyframe Animations --- */
+/* --- Keyframe Animations (Unchanged) --- */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
@@ -55,14 +52,23 @@ body {
 
 .auth-branding {
     flex: 1;
-    background-color: #000;
+    /* CHANGE: This background was hardcoded to black (#000) for a dark mode contrast. 
+       To maintain high contrast with the white form, we'll keep it dark but use a 
+       dark theme color or a dark neutral background, and ensure the content text is white.
+       If you want a pure *white* mode, this background should be a light accent or white,
+       but that would defeat the visual separation. Let's keep it a strong color 
+       (the original aurora-1/primary accent color) or a dark neutral for visual impact. 
+       We will change it to a deep accent color for a vibrant look.
+    */
+    background-color: #1e3a8a; /* Deep Blue Accent for Branding Contrast */
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     overflow: hidden;
 }
-/* Aurora Background Effect */
+/* Aurora Background Effect - The colors are fine, but let's increase opacity slightly
+   since the branding background is now a solid color, not black. */
 .auth-branding::before, .auth-branding::after {
     content: '';
     position: absolute;
@@ -70,7 +76,7 @@ body {
     height: 600px;
     border-radius: 50%;
     filter: blur(150px);
-    opacity: 0.3;
+    opacity: 0.4; /* Slightly increased opacity for visibility on solid deep blue */
 }
 .auth-branding::before {
     background-color: var(--aurora-1);
@@ -88,7 +94,7 @@ body {
 
 .auth-branding-content {
     text-align: center;
-    color: white;
+    color: white; /* Keep white text for high contrast on the dark branding background */
     z-index: 1;
 }
 .auth-branding-content h2 {
@@ -137,18 +143,18 @@ body {
     width: 100%;
     padding: 0.85rem 1rem;
     box-sizing: border-box;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Light border */
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--font-color);
+    background-color: var(--card-color); /* White/Light background */
+    color: var(--font-color); /* Dark text */
     transition: all 0.2s ease;
 }
 .form-group input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 4px var(--accent-glow);
+    box-shadow: 0 0 0 4px var(--accent-glow); /* Light glow */
 }
 .form-footer {
     text-align: center;
@@ -161,10 +167,17 @@ body {
     font-weight: 500;
 }
 .error-message {
-    color: #f87171; text-align: center; margin-top: 1rem; background-color: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 8px; font-weight: 500;
+    /* Background changed to a lighter, less jarring shade */
+    color: #cc3636; 
+    text-align: center; 
+    margin-top: 1rem; 
+    background-color: rgba(239, 68, 68, 0.08); /* Lighter background */
+    padding: 0.75rem; 
+    border-radius: 8px; 
+    font-weight: 500;
 }
 
-/* --- Buttons --- */
+/* --- Buttons (Unchanged as they use white text on accent color) --- */
 .btn {
     display: inline-block;
     width: 100%;
@@ -209,27 +222,42 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: var(--card-color);
-    border: 1px solid var(--border-color);
+    background: var(--card-color); /* White background */
+    border: 1px solid var(--border-color); /* Light border */
     border-radius: 12px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow); /* Subtle shadow */
     margin-bottom: 2rem;
     animation: fadeIn 0.5s ease-out;
 }
 .header h1 { margin: 0; font-size: 1.5rem; font-weight: 600; }
 .header h1 span { font-weight: 700; color: var(--accent-color); }
-.header a { text-decoration: none; background: transparent; border: 1px solid var(--border-color); color: var(--subtle-font-color); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; transition: all 0.2s ease; }
-.header a:hover { border-color: #ef4444; background-color: #ef4444; color: white; }
+.header a { 
+    text-decoration: none; 
+    background: transparent; 
+    border: 1px solid var(--border-color); /* Light border */
+    color: var(--subtle-font-color); /* Dark text */
+    padding: 0.6rem 1.2rem; 
+    border-radius: 8px; 
+    font-weight: 500; 
+    transition: all 0.2s ease; 
+}
+.header a:hover { 
+    /* CHANGED: This was a subtle dark mode effect on a dark background hover.
+       Changed to a standard primary button look for bright mode */
+    border-color: var(--accent-color); 
+    background-color: var(--accent-color); 
+    color: white; 
+}
 
 .module {
     margin-bottom: 2rem;
-    background: var(--card-color);
-    border: 1px solid var(--border-color);
+    background: var(--card-color); /* White background */
+    border: 1px solid var(--border-color); /* Light border */
     border-radius: 12px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow); /* Subtle shadow */
     animation: fadeIn 0.5s ease-out forwards;
 }
-.module-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color); }
+.module-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color); } /* Light divider */
 .module-header h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
 .module-body { padding: 2rem; }
 .module form { display: flex; gap: 1.5rem; align-items: center; }
@@ -239,9 +267,12 @@ table { width: 100%; border-collapse: separate; border-spacing: 0; }
 th, td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border-color); }
 thead th { font-weight: 600; color: var(--subtle-font-color); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
 tbody tr { transition: background-color 0.2s ease; animation: slideIn 0.5s ease-out forwards; opacity: 0; }
-tbody tr:hover { background-color: rgba(139, 148, 158, 0.1); }
+tbody tr:hover { 
+    /* CHANGED: Adjusted hover effect from a subtle dark mode color to a subtle light one */
+    background-color: rgba(79, 70, 229, 0.05); /* Very light accent tint */
+}
 tbody tr:last-child td { border-bottom: none; }
-/* Staggered animation delay for the first 10 rows */
+/* Staggered animation delay for the first 10 rows (Unchanged) */
 tbody tr:nth-child(1) { animation-delay: 0.1s; }
 tbody tr:nth-child(2) { animation-delay: 0.15s; }
 tbody tr:nth-child(3) { animation-delay: 0.2s; }
@@ -253,11 +284,11 @@ tbody tr:nth-child(8) { animation-delay: 0.45s; }
 tbody tr:nth-child(9) { animation-delay: 0.5s; }
 tbody tr:nth-child(10) { animation-delay: 0.55s; }
 
-/* Thank You Page */
+/* Thank You Page (Unchanged - uses variables correctly) */
 .thank-you-container a { color: var(--accent-color); text-decoration: none; font-weight: 500; }
 .thank-you-container p { text-align: center; }
 
-/* --- Input with Icon --- */
+/* --- Input with Icon (Unchanged - uses variables correctly) --- */
 .input-with-icon {
     position: relative;
 }
@@ -273,5 +304,5 @@ tbody tr:nth-child(10) { animation-delay: 0.55s; }
 }
 
 .input-with-icon input {
-    padding-left: 3rem; /* Icon ke liye space */
+    padding-left: 3rem; 
 }

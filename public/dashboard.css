@@ -1,33 +1,33 @@
 /* --- Google Font Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* --- New Dark Theme Color Palette --- */
+/* --- Bright/White Theme Color Palette --- */
 :root {
     /* Backgrounds */
-    --bg-color: #0B0C10;
-    --card-color: #161A1D;
+    --bg-color: #F8F9FA; /* Very light grey/off-white (formerly #0B0C10) */
+    --card-color: #0b0a0a; /* Pure white (formerly #161A1D) */
     
-    /* Typography */
-    --font-color: #FFFFFF;
-    --body-font-color: #C5C6C7;
-    --subtle-font-color: #8D8D8D;
+    /* Typography (Inverted for contrast) */
+    --font-color: #212529; /* Dark grey/black for main headers (formerly #FFFFFF) */
+    --body-font-color: #495057; /* Medium-dark grey for body text (formerly #C5C6C7) */
+    --subtle-font-color: #6C757D; /* Medium grey for subtle text (formerly #8D8D8D) */
 
-    /* Primary Palette */
+    /* Primary Palette (Kept the same deep colors for contrast and branding) */
     --primary-color: #1E2A78;
     --secondary-color: #6A0DAD;
     --accent-color: #D726FF;
 
     /* UI Elements */
-    --border-color: #30363d;
-    --shadow: 0 10px 20px -10px rgba(106, 13, 173, 0.2);
-    --primary-hover: #243B8C;
+    --border-color: #DEE2E6; /* Light grey for borders (formerly #30363d) */
+    --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.08); /* Lighter, less aggressive shadow (formerly dark purple) */
+    --primary-hover: #E9ECEF; /* Very light grey for hover background (formerly dark blue) */
 
     /* Sidenav */
-    --sidenav-bg: #161A1D;
-    --sidenav-color: #8D8D8D;
+    --sidenav-bg: #FFFFFF; /* White background (formerly #161A1D) */
+    --sidenav-color: #010101; /* Dark grey link color (formerly #8D8D8D) */
     --sidenav-active-bg: var(--primary-color);
 
-    /* Status Colors */
+    /* Status Colors (Kept the same) */
     --success: #00C851;
     --error: #FF4444;
 }
@@ -57,17 +57,17 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color); /* Adjusted border-color */
 }
 .sidenav-header {
     padding: 1.5rem;
     text-align: center;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color); /* Adjusted border-color */
 }
 .sidenav-header .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--font-color);
+    color: var(--font-color); /* Changed to dark font color */
     letter-spacing: 1px;
 }
 .sidenav-nav {
@@ -79,18 +79,18 @@ body {
     align-items: center;
     padding: 0.9rem 1.5rem;
     text-decoration: none;
-    color: var(--sidenav-color);
+    color: var(--sidenav-color); /* Adjusted link color */
     margin: 0.2rem 1rem;
     border-radius: 8px;
     transition: background-color 0.2s, color 0.2s;
 }
 .nav-item:hover {
-    background-color: var(--primary-hover);
-    color: #fff;
+    background-color: var(--primary-hover); /* Changed to light hover background */
+    color: var(--font-color); /* Changed hover text to dark color */
 }
 .nav-item.active {
     background-color: var(--sidenav-active-bg);
-    color: #fff;
+    color: #fff; /* White text on primary background is fine */
 }
 .nav-icon {
     width: 20px;
@@ -99,7 +99,7 @@ body {
 }
 .sidenav-footer {
     padding: 1.5rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color); /* Adjusted border-color */
 }
 .sidenav-footer .logout-btn {
     display: block;
@@ -107,7 +107,7 @@ body {
     text-align: center;
     padding: 0.8rem;
     border-radius: 8px;
-    background-color: #24292e;
+    background-color: var(--primary-color); /* Use primary color or a dark neutral */
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -131,11 +131,11 @@ body {
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
-    color: var(--font-color);
+    color: var(--font-color); /* Changed to dark font color */
 }
 .main-header p {
     margin: 0;
-    color: var(--subtle-font-color);
+    color: var(--subtle-font-color); /* Adjusted subtle color */
 }
 
 /* --- Card Grid Layout --- */
@@ -147,15 +147,15 @@ body {
 
 /* --- Stat Card Style --- */
 .stat-card {
-    background-color: var(--card-color);
+    background-color: var(--card-color); /* Changed to white */
     padding: 1.5rem;
     border-radius: 12px;
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color); /* Adjusted border-color */
+    box-shadow: var(--shadow); /* Adjusted shadow */
 }
 .stat-card h4 {
     margin: 0 0 0.5rem 0;
-    color: var(--subtle-font-color);
+    color: var(--subtle-font-color); /* Adjusted subtle color */
     font-weight: 500;
     font-size: 1rem;
 }
@@ -163,7 +163,7 @@ body {
     font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
-    color: var(--font-color);
+    color: var(--font-color); /* Changed to dark font color */
 }
 .stat-card .stat-change {
     margin: 0.5rem 0 0 0;
@@ -173,18 +173,18 @@ body {
 
 /* --- Dashboard Card Style --- */
 .dashboard-card {
-    background: var(--card-color);
+    background: var(--card-color); /* Changed to white */
     border-radius: 12px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow); /* Adjusted shadow */
     padding: 2rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); /* Adjusted border-color */
 }
 .dashboard-card h2 {
     margin-top: 0;
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    color: var(--font-color);
+    color: var(--font-color); /* Changed to dark font color */
 }
 .card-full-width {
     grid-column: 1 / -1;
@@ -192,15 +192,16 @@ body {
 
 /* --- Table and Form Styles --- */
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); } /* Adjusted border-color */
 thead th { font-weight: 600; color: var(--subtle-font-color); }
-tbody tr:hover { background-color: rgba(36, 59, 140, 0.2); }
+tbody tr:hover { background-color: rgba(30, 42, 120, 0.05); } /* Much lighter hover effect (formerly dark blue overlay) */
 
 form { display: flex; gap: 1rem; align-items: center; }
 input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="number"], select {
     flex: 1; padding: 0.8rem 1rem; border-radius: 8px;
-    border: 1px solid var(--border-color); font-size: 1rem;
-    background-color: var(--bg-color); color: var(--body-font-color);
+    border: 1px solid var(--border-color); font-size: 1rem; /* Adjusted border-color */
+    background-color: var(--card-color); /* Changed to white */
+    color: var(--body-font-color); /* Changed to dark font color */
 }
 select { width: 100%; }
 
@@ -221,14 +222,14 @@ select { width: 100%; }
     font-weight: 500;
 }
 .alert-success {
-    background-color: rgba(0, 200, 81, 0.1);
-    color: var(--success);
-    border: 1px solid var(--success);
+    background-color: rgba(0, 200, 81, 0.05); /* Lighter background */
+    color: #00893C; /* Darker text for better contrast on light background */
+    border: 1px solid rgba(0, 200, 81, 0.4);
 }
 .alert-danger {
-    background-color: rgba(255, 68, 68, 0.1);
-    color: var(--error);
-    border: 1px solid var(--error);
+    background-color: rgba(255, 68, 68, 0.05); /* Lighter background */
+    color: #CC0000; /* Darker text for better contrast on light background */
+    border: 1px solid rgba(255, 68, 68, 0.4);
 }
 
 /* Small Buttons */

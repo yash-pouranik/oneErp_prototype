@@ -1,42 +1,17 @@
-/* --- Glassmorphism Landing Page Styles --- */
-body {
-    overflow-x: hidden; /* Prevent horizontal scroll from blurred shapes */
+/* --- Glassmorphism Landing Page Styles - BRIGHT MODE (FINAL NAVBAR FIX) --- */
+
+
+:root {
+    --font-color: #212529;         /* Dark text */
+    --body-font-color: #495057;    /* Medium dark text */
+    --primary-color: #1E2A78;      /* Deep blue */
+    --primary-hover: #16306b;      /* Slightly darker blue for hover */
+    --accent-color: #F148FF;       /* Accent color for buttons */
+    --subtle-font-color: #888;     /* For footer/subtle text */
+    --border-color: #e0e0e0;       /* For cards/testimonials */
 }
 
-.page-wrapper {
-    position: relative;
-    z-index: 2;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-/* Background Shapes */
-.shape-blur {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(150px);
-    z-index: 1;
-}
-.shape-1 {
-    width: 500px;
-    height: 500px;
-    top: -100px;
-    left: -200px;
-    background: rgba(106, 13, 173, 0.3); /* Royal Purple */
-}
-.shape-2 {
-    width: 400px;
-    height: 400px;
-    bottom: -150px;
-    right: -150px;
-    background: rgba(30, 42, 120, 0.4); /* Deep Blue */
-}
-
-/* Header */
+/* Header (Glassmorphism Effect) */
 .main-header {
     padding: 1.5rem 0;
 }
@@ -44,25 +19,34 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(22, 26, 29, 0.6); /* Card color with transparency */
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(48, 54, 61, 0.5); /* Border color with transparency */
+    /* ... rest of the glass styling ... */
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(12px); 
+    border: 1px solid rgba(222, 226, 230, 0.6); 
     padding: 1rem 2rem;
     border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
 }
-.logo {
+
+/* *** CRITICAL FIX FOR LOGO VISIBILITY *** */
+.main-header .container .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--font-color);
+    /* FIX 1: Using higher specificity selector to guarantee dark text */
+    color: var(--font-color) !important; 
     text-decoration: none;
+    min-width: 150px; 
 }
+/* **************************************** */
+
 .main-nav {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 .nav-link {
-    color: var(--body-font-color);
+    /* Ensures regular nav links (like 'Login' if it's not a button) are visible */
+    color: var(--body-font-color); 
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
@@ -73,12 +57,40 @@ body {
 .nav-btn {
     width: auto;
     padding: 0.6rem 1.2rem;
+    /* Ensures the button has a dark background and white text */
     background-color: var(--primary-color);
+    color: #fff; 
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 .nav-btn:hover {
     background-color: var(--primary-hover);
 }
 
+/* Background Shapes */
+/* .shape-blur {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: 1;
+    color: black;
+}
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    left: -200px;
+    background: rgba(106, 13, 173, 0.15); 
+}
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    right: -150px;
+    background: rgba(30, 42, 120, 0.15); 
+} */
 
 /* Hero Section */
 .hero {
@@ -92,9 +104,9 @@ body {
     font-size: 4rem;
     font-weight: 700;
     line-height: 1.2;
-    color: #fff;
+    color: var(--font-color);
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(215, 38, 255, 0.3); /* Neon Purple glow */
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.15); 
 }
 .hero .subtitle {
     font-size: 1.2rem;
@@ -110,14 +122,14 @@ body {
     background-color: var(--accent-color);
     color: #fff;
     border: none;
-    box-shadow: 0 0 30px rgba(215, 38, 255, 0.5);
+    box-shadow: 0 12px 25px -10px rgba(215, 38, 255, 0.3);
 }
 .cta-button:hover {
     background-color: #F148FF;
     transform: translateY(-3px);
 }
 
-/* Footer */
+/* Footer (No change needed) */
 .main-footer {
     padding: 4rem 0 2rem 0;
     text-align: center;
@@ -125,7 +137,7 @@ body {
 }
 /* --- Additional Landing Page Styles --- */
 
-/* Section Header */
+/* Section Header (No change needed) */
 .section-header {
     text-align: center;
     max-width: 700px;
@@ -153,12 +165,13 @@ body {
     gap: 1.5rem;
 }
 .feature-card {
-    background: rgba(22, 26, 29, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(222, 226, 230, 0.6);
     padding: 2rem;
     border-radius: 12px;
     text-align: left;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08); 
 }
 .feature-card h3 {
     font-size: 1.5rem;
@@ -177,7 +190,7 @@ body {
     gap: 2rem;
 }
 .testimonial-card {
-    background: linear-gradient(135deg, rgba(30, 42, 120, 0.3), rgba(106, 13, 173, 0.3));
+    background: linear-gradient(135deg, rgba(30, 42, 120, 0.05), rgba(106, 13, 173, 0.05));
     border: 1px solid var(--border-color);
     padding: 2.5rem;
     border-radius: 12px;
@@ -186,6 +199,7 @@ body {
     font-size: 1.1rem;
     line-height: 1.7;
     margin: 0 0 1.5rem 0;
+    color: var(--body-font-color);
 }
 .testimonial-card .author {
     font-weight: 600;
