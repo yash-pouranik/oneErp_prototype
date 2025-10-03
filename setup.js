@@ -24,12 +24,13 @@ const setup = async () => {
         
         // 2. Create the super admin user
         const superAdmin = new User({
-            name: 'Super Admin',
-            email: process.env.SUPER_ADMIN_EMAIL,
-            password: process.env.SUPER_ADMIN_PASSWORD,
-            institute: adminInstitute._id,
-            role: 'super_admin'
-        });
+    name: 'Super Admin',
+    email: 'superadmin@one-erp.com',
+    password: 'yash1234',
+    institute: adminInstitute._id,
+    role: 'super_admin'
+});
+
         await superAdmin.save();
 
         console.log('✅ Super admin setup complete!');
