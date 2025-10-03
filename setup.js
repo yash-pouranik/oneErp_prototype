@@ -1,8 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Institute = require('./models/Institute');
 
-const MONGO_URI = 'mongodb://localhost:27017/one_erp_v2_db';
+const MONGO_URI = process.env.MONGO_URI;
 
 const setup = async () => {
     await mongoose.connect(MONGO_URI);
@@ -23,17 +24,17 @@ const setup = async () => {
         
         // 2. Create the super admin user
         const superAdmin = new User({
-            name: 'Super Admin', // Added the required name field
-            email: 'superadmin@one-erp.com',
-            password: 'yash1234',
+            name: 'Super Admin',
+            email: process.env.SUPER_ADMIN_EMAIL,
+            password: process.env.SUPER_ADMIN_PASSWORD,
             institute: adminInstitute._id,
             role: 'super_admin'
         });
         await superAdmin.save();
 
         console.log('✅ Super admin setup complete!');
-        console.log('Email: superadmin@one-erp.com');
-        console.log('Password: yash1234'); // Updated to reflect the new password
+        console.log(`Email: ${process.env.SUPER_ADMIN_EMAIL}`);
+        console.log(`Password: ${process.env.SUPER_ADMIN_PASSWORD}`);
 
     } catch (error) {
         console.error('Error during setup:', error);
