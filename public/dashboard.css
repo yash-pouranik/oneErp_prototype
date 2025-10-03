@@ -5,7 +5,7 @@
 :root {
     /* Backgrounds */
     --bg-color: #F8F9FA; /* Very light grey/off-white (formerly #0B0C10) */
-    --card-color: #0b0a0a; /* Pure white (formerly #161A1D) */
+    --card-color: #fff; /* Pure white */
     
     /* Typography (Inverted for contrast) */
     --font-color: #212529; /* Dark grey/black for main headers (formerly #FFFFFF) */
