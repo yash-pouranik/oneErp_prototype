@@ -23,7 +23,7 @@
     background: rgba(255, 255, 255, 0.7); 
     backdrop-filter: blur(12px); 
     border: 1px solid rgba(222, 226, 230, 0.6); 
-    padding: 1rem 2rem;
+    
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
 }
@@ -56,7 +56,6 @@
 }
 .nav-btn {
     width: auto;
-    padding: 0.6rem 1.2rem;
     /* Ensures the button has a dark background and white text */
     background-color: var(--primary-color);
     color: #fff; 
@@ -94,8 +93,8 @@
 
 /* Hero Section */
 .hero {
-    padding: 8rem 0;
     text-align: center;
+    margin-top: 0 !important;
 }
 .hero-content {
     max-width: 800px;
@@ -118,7 +117,6 @@
 }
 .cta-button {
     font-size: 1.1rem;
-    padding: 1rem 2.5rem;
     background-color: var(--accent-color);
     color: #fff;
     border: none;
@@ -131,7 +129,6 @@
 
 /* Footer (No change needed) */
 .main-footer {
-    padding: 4rem 0 2rem 0;
     text-align: center;
     color: var(--subtle-font-color);
 }
@@ -157,7 +154,6 @@
 
 /* Features Section */
 .features {
-    padding: 6rem 0;
 }
 .features-grid {
     display: grid;
@@ -182,7 +178,6 @@
 
 /* Testimonials Section */
 .testimonials {
-    padding: 6rem 0;
 }
 .testimonials-grid {
     display: grid;
