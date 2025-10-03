@@ -3,13 +3,15 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const path = require('path');
 const flash = require('connect-flash');
+require('dotenv').config(); // Load .env variables
 
 const app = express();
-const PORT = 3000;
+
+// Use Render's port or fallback to 3000 locally
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
-
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -18,14 +20,10 @@ const superAdminRoutes = require('./routes/superAdmin');
 const teacherRoutes = require('./routes/teacher');
 const studentRoutes = require('./routes/student');
 
-
-
 app.use(express.static('public'));
 
-
-
 // --- Database Connection ---
-const MONGO_URI = 'mongodb://localhost:27017/one_erp_v2_db';
+const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB connected.'))
     .catch(err => console.error('MongoDB connection error:', err));
@@ -35,13 +33,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(session({
-    secret: 'a-much-better-sih-secret-key-for-v2',
+    secret: process.env.SESSION_SECRET || 'default-secret-key',
     resave: false,
     saveUninitialized: false,
 }));
 
 app.use(flash());
-
 
 // Middleware to pass session data to all views
 app.use((req, res, next) => {
@@ -55,7 +52,6 @@ app.use('/dashboard', instituteRoutes);
 app.use('/super-admin', superAdminRoutes);
 app.use('/teacher', teacherRoutes);
 app.use('/student', studentRoutes);
-
 
 // --- Start Server ---
 app.listen(PORT, () => {
