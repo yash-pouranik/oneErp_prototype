@@ -3,70 +3,74 @@
 <head>
     <title>Super Admin Dashboard</title>
     <link rel="stylesheet" href="/dashboard.css">
-    <link rel="stylesheet" href="/style.css"> </head>
-<body class="dashboard-bg">
-    
-    <div class="dashboard-header">
-        <h1>
-            <span class="logo">ONE-ERP</span>
-            <span class="portal-title">| Super Admin Panel</span>
-        </h1>
-        <a href="/logout" class="logout-btn">Logout</a>
-    </div>
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidenav-super-admin') %>
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Super Admin Panel</h1>
+                    <p>Welcome, Super Admin!</p>
+                </div>
+            </header>
 
-    <main class="dashboard-main">
-        <div class="dashboard-card">
-            <h2>Pending Institute Approvals</h2>
-            
-            <% if (institutes.length === 0) { %>
-                <p style="text-align: center; padding: 2rem; color: var(--subtle-font-color);">There are no pending approvals at the moment.</p>
-            <% } else { %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Institute Name</th>
-                            <th>Subdomain</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% institutes.forEach(inst => { %>
+            <div class="dashboard-card">
+                <h2>Pending Institute Approvals</h2>
+                <% if (institutes.length === 0) { %>
+                    <p style="text-align: center; padding: 2rem; color: var(--subtle-font-color);">There are no pending approvals at the moment.</p>
+                <% } else { %>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Institute Name</th>
+                                    <th>Subdomain</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% institutes.forEach(inst => { %>
+                                    <tr>
+                                        <td><%= inst.name %></td>
+                                        <td><%= inst.subdomain %></td>
+                                        <td>
+                                            <form action="/super-admin/approve/<%= inst._id %>" method="POST" style="margin:0;">
+                                                <button type="submit" class="btn btn-success">Approve</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="dashboard-card" style="margin-top: 2rem;">
+                <h2>All Institutes</h2>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
                             <tr>
-                                <td><%= inst.name %></td>
-                                <td><%= inst.subdomain %></td>
-                                <td>
-                                    <form action="/super-admin/approve/<%= inst._id %>" method="POST" style="margin:0;">
-                                        <button type="submit" class="btn btn-success">Approve</button>
-                                    </form>
-                                </td>
+                                <th>Institute Name</th>
+                                <th>Subdomain</th>
+                                <th>Total Students</th>
                             </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            <% } %>
-        </div>
-
-        <div class="dashboard-card" style="margin-top: 2rem;">
-            <h2>All Institutes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Institute Name</th>
-                        <th>Subdomain</th>
-                        <th>Total Students</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% activeInstitutes.forEach(inst => { %>
-                        <tr>
-                            <td><%= inst.name %></td>
-                            <td><%= inst.subdomain %></td>
-                            <td><%= inst.studentCount %></td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                        </thead>
+                        <tbody>
+                            <% activeInstitutes.forEach(inst => { %>
+                                <tr>
+                                    <td><%= inst.name %></td>
+                                    <td><%= inst.subdomain %></td>
+                                    <td><%= inst.studentCount %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

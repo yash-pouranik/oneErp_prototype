@@ -19,13 +19,17 @@ router.post('/login', async (req, res) => {
         let user = await User.findOne({ email }).populate('institute');
         
         if (user) {
-            // **FIX:** Verify password for the user (admin/teacher) first
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
                 return res.render('login', { error: 'Invalid credentials.' });
             }
 
-            // --- If password is correct, create session ---
+            // **BUG FIX:** Check if the institute is active before creating a session
+            if (user.role !== 'super_admin' && user.institute.status !== 'active') {
+                return res.render('login', { error: 'Your institute has not been approved yet. Please wait for approval.' });
+            }
+
+            // --- If password is correct and institute is active, create session ---
             req.session.userId = user._id;
             req.session.role = user.role;
             req.session.userName = user.name;
@@ -42,6 +46,11 @@ router.post('/login', async (req, res) => {
         if (student) {
             const isMatch = await bcrypt.compare(password, student.password);
             if (!isMatch) return res.render('login', { error: 'Invalid credentials.' });
+
+            // **BUG FIX:** Also check if student's institute is active
+            if (student.institute.status !== 'active') {
+                return res.render('login', { error: 'Your institute has not been approved yet. Please wait for approval.' });
+            }
 
             // Create session for the student
             req.session.userId = student._id;
